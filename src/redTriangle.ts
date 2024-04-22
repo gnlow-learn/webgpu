@@ -36,8 +36,6 @@ const renderPassDescriptor: GPURenderPassDescriptor = {
 }
 
 const render = () => {
-    const encoder = device.createCommandEncoder({ label: "our encoder"})
-
     const pass = encoder.beginRenderPass(renderPassDescriptor)
     pass.setPipeline(pipeline)
     pass.draw(3)
