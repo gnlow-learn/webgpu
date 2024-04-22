@@ -22,5 +22,7 @@ async ($canvas: HTMLCanvasElement) => {
         height: $canvas.height,
     })
 
-    return { ctx, device, format }
+    const encoder = device.createCommandEncoder()
+
+    return { ctx, device, format, encoder }
 }
