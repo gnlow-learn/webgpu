@@ -2,7 +2,7 @@ import { init } from "./init.ts"
 
 const $canvas = document.querySelector("canvas")!
 
-const { ctx, device, format, encoder} = await init($canvas)
+const { ctx, device, format, encoder } = await init($canvas)
 
 const vertices = new Float32Array([
     -0.8, -0.8,

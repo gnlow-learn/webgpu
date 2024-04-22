@@ -1,1 +1,1 @@
-import "./src/cell.ts"
+import "./src/redTriangle.ts"
