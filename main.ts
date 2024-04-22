@@ -1,26 +1,8 @@
+import { init } from "./src/init.ts"
+
 const $canvas = document.querySelector("canvas")!
 
-if (!navigator.gpu) {
-    throw new Error("WebGPU not supported on this browser")
-}
-
-const adapter = await navigator.gpu.requestAdapter()
-
-if (!adapter) {
-    throw new Error("No appropriate GPUAdapter found.")
-}
-
-const device = await adapter.requestDevice()
-
-const ctx = $canvas.getContext("webgpu")! as unknown as GPUCanvasContext
-const format = navigator.gpu.getPreferredCanvasFormat()
-
-ctx.configure({
-    device,
-    format,
-    width: $canvas.width,
-    height: $canvas.height,
-})
+const { ctx, device, format } = await init($canvas)
 
 const encoder = device.createCommandEncoder()
 
