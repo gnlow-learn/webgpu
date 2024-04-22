@@ -26,3 +26,9 @@ async ($canvas: HTMLCanvasElement) => {
 
     return { ctx, device, format, encoder }
 }
+
+export const getCode = async (importMeta: ImportMeta) => {
+    const [_, name] = /\/([^/]+).ts/.exec(importMeta.url)!
+
+    return await fetch(`/src/${name}.wgsl`).then(x => x.text())
+}

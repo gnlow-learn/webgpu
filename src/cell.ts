@@ -1,4 +1,4 @@
-import { init } from "./init.ts"
+import { init, getCode } from "./util.ts"
 
 const $canvas = document.querySelector("canvas")!
 
@@ -39,7 +39,7 @@ const vertexBufferLayout: GPUVertexBufferLayout = {
 
 const cellShaderModule = device.createShaderModule({
     label: "Cell shader",
-    code: await fetch("/src/cell.wgsl").then(x => x.text())
+    code: await getCode(import.meta),
 })
 
 const cellPipeline = device.createRenderPipeline({
