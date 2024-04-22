@@ -13,7 +13,15 @@ vec4f {
     return vec4f(pos[vertexIndex], 0.0, 1.0);
 }
 
-@fragment fn fs() ->
+@fragment fn fs(
+    @builtin(position)
+    pos: vec4f
+) ->
 @location(0) vec4f {
-    return vec4f(1.0, 0.0, 0.0, 1.0);
+    let x = pos.x;
+    let y = pos.y;
+    let r = 0.5 * (1 + sin((x + y) / 100));
+    let g = 0.5 * (1 + sin((x - y) / 100));
+    let b = 0.5 * (1 + cos((x + y) / 100));
+    return vec4f(r, g, b, 1.0);
 }

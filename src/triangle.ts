@@ -28,7 +28,7 @@ const renderPassDescriptor: GPURenderPassDescriptor = {
     colorAttachments: [
         {
             view: ctx.getCurrentTexture().createView(),
-            clearValue: [0.3, 0.3, 0.3, 1],
+            clearValue: [0.9, 0.9, 0.95, 1],
             loadOp: "clear",
             storeOp: "store",
         }
