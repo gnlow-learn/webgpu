@@ -5,18 +5,32 @@
 @builtin(position)
 vec4f {
     let pos = array(
-        vec2f(-0.5,  0.5),
-        vec2f(-0.5, -0.5),
-        vec2f( 0.5, -0.5),
-        vec2f(-0.5,  0.5),
-        vec2f( 0.5,  0.5),
-        vec2f( 0.5, -0.5),
+        vec2f(-1,  1),
+        vec2f(-1, -1),
+        vec2f( 1, -1),
+        vec2f(-1,  1),
+        vec2f( 1,  1),
+        vec2f( 1, -1),
     );
 
     return vec4f(pos[vertexIndex], 0.0, 1.0);
 }
 
 const PI = 3.14;
+
+fn chladni(
+    n: f32,
+    m: f32,
+    l: f32,
+    x: f32,
+    y: f32,
+) -> f32 {
+    return 0
+        + cos(n * PI * x / l)
+        * cos(m * PI * y / l)
+        - cos(m * PI * x / l)
+        * cos(n * PI * y / l);
+}
 
 @fragment fn fs(
     @builtin(position)
@@ -26,18 +40,10 @@ const PI = 3.14;
     let x = pos.x;
     let y = pos.y;
 
-    let n = 1.0;
-    let m = 5.0;
-    let l = 100.0;
+    let l = 20/0.12;
 
-    let p =
-          cos(n * PI * x / l)
-        * cos(m * PI * y / l)
-        - cos(m * PI * x / l)
-        * cos(n * PI * y / l);
-
-    let r = p;
-    let g = p;
-    let b = p;
-    return vec4f(r, g, b, 1.0);
+    let r = chladni(1, 5, l, x+2, y);
+    let g = chladni(1, 4, l, x, y+2);
+    let b = chladni(1, 3, l, x, y);
+    return vec4f(20*vec3f(r, g, b), 1.0);
 }
