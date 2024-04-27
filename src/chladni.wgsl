@@ -1,3 +1,7 @@
+@group(0)
+@binding(0)
+var<uniform> t: f32;
+
 @vertex fn vs(
     @builtin(vertex_index)
     vertexIndex: u32
@@ -40,7 +44,7 @@ fn chladni(
     let x = pos.x;
     let y = pos.y;
 
-    let l = 20/0.12;
+    let l = 20/0.12 / t * 10;
 
     let r = chladni(1, 5, l, x+2, y);
     let g = chladni(1, 4, l, x, y+2);
