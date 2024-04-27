@@ -36,6 +36,13 @@ fn chladni(
         * cos(n * PI * y / l);
 }
 
+fn cut(x: f32) -> f32 {
+    return max(0, min(x, 1));
+}
+fn osc(freq: f32, t: f32) -> f32 {
+    return sin(sinh(t) * 2 * PI * freq) / 4 + 0.25;
+}
+
 @fragment fn fs(
     @builtin(position)
     pos: vec4f
@@ -44,10 +51,14 @@ fn chladni(
     let x = pos.x;
     let y = pos.y;
 
-    let l = 20/0.12 / t * 10;
+    let l = 20/0.12;
 
     let r = chladni(1, 5, l, x+2, y);
     let g = chladni(1, 4, l, x, y+2);
     let b = chladni(1, 3, l, x, y);
-    return vec4f(20*vec3f(r, g, b), 1.0);
+
+    let rn = osc(r, t / 100);
+    let gn = osc(g, t / 100);
+    let bn = osc(b, t / 100);
+    return vec4f(20*vec3f(rn, gn, bn), 1.0);
 }
